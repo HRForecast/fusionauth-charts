@@ -41,7 +41,7 @@ spec:
             - -c
             - >
               set -x;
-              while [[ "$(nc -zv '{{- .Values.database.host -}}' {{ .Values.database.port }} &> /dev/null; echo $?)" != 0 ]]; do
+              while [[ "$(nc -zv '{{ include "fusionauth.databaseHost" . }}' {{ .Values.database.port }} &> /dev/null; echo $?)" != 0 ]]; do
                 echo '.'
                 sleep 15;
               done
@@ -98,7 +98,7 @@ spec:
                   key: rootpassword
             {{- end }}
             - name: DATABASE_URL
-              value: "jdbc:{{ .Values.database.protocol }}://{{- required "A valid database host is required!" .Values.database.host -}}:{{ .Values.database.port }}/{{ .Values.database.name }}{{ include "fusionauth.databaseTLS" . }}"
+              value: "jdbc:{{ .Values.database.protocol }}://{{ include "fusionauth.databaseHost" . }}:{{ .Values.database.port }}/{{ .Values.database.name }}{{ include "fusionauth.databaseTLS" . }}"
             - name: SEARCH_TYPE
               value: {{ .Values.search.engine }}
               {{- if eq .Values.search.engine "elasticsearch" }}
