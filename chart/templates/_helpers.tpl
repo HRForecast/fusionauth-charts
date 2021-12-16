@@ -24,6 +24,10 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 {{- end -}}
 
+
+{{/*
+Database host
+*/}}
 {{- define "fusionauth.databaseHost" -}}
 {{- if .Values.database.host -}}
 {{- .Values.database.host -}}
@@ -31,6 +35,7 @@ If release name contains chart name it will be used as a full name.
 {{- .Release.Name -}}-postgresql
 {{- end -}}
 {{- end -}}
+
 
 {{/*
 Set apiVersion for ingress

@@ -113,6 +113,10 @@ environment:
   # - name: FUSIONAUTH_APP_KICKSTART_FILE
   #   value: /kickstart/kickstart.json
 
+# Allows loading secrets from existing secret/
+# Values are loaded into deployment like they are stored in secrets as key: value
+existingSecret: ''
+
 kickstart:
   enabled: false
   data:
