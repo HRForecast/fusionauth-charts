@@ -87,7 +87,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "fusionauth.database.secretName" . }}
-                  key: password
+                  key: FUSIONAUTH_DB_PASS
             {{- if .Values.database.root.user }}
             - name: DATABASE_ROOT_USERNAME
               value: {{ .Values.database.root.user }}
@@ -95,7 +95,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "fusionauth.database.secretName" . }}
-                  key: rootpassword
+                  key: MASTER_DB_PASS
             {{- end }}
             - name: DATABASE_URL
               value: "jdbc:{{ .Values.database.protocol }}://{{ include "fusionauth.databaseHost" . }}:{{ .Values.database.port }}/{{ .Values.database.name }}{{ include "fusionauth.databaseTLS" . }}"
